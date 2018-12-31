@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/wuye-test?useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true&characterEncoding=utf-8
+    username: root
+    password: 272779
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  session:
+    store-type: none
+
+  http:
+    encoding:
+      charset: utf-8
+
+  thymeleaf:
+     cache: false
+     prefix: classpath:/templates/
+     suffix: .html
+     encoding: UTF-8
+     servlet:
+      content-type: text/html
+     mode: HTML5
+
+server:
+  port: 8080

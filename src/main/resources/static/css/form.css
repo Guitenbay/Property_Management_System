@@ -1,0 +1,10 @@
+.bd-example{
+    padding: 1.5rem;
+    margin: 1rem 0 1rem;
+    border: .25rem solid #f7f7f9;
+}
+
+.short-row{
+    margin-right: 0;
+    margin-left: 0;
+}
