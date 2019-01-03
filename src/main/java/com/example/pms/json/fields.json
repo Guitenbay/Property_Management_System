@@ -1,15 +1,26 @@
 {
-  "User": {
-    "name": "Name",
-    "age": "Age",
-    "id": "ID",
-    "email": "Email"
+  "ParkingSpace_zh": {
+    "id": "车位ID",
+    "communityID": "小区ID",
+    "communityName": "小区名",
+    "state": "车位状态",
+    "type": "车位类型",
+    "holderID": "车主ID/车牌号",
+    "holder": "车主"
   },
-  "Pks": {
-    "id": "ID",
-    "communityID": "Community ID",
-    "communityName": "Community Name",
-    "state": "State",
-    "type": "Type"
+  "Residence_zh": {
+    "residenceID": "房屋ID",
+    "communityID": "小区ID",
+    "communityName": "小区名",
+    "floor": "楼层",
+    "unit": "单元号",
+    "room": "房间号",
+    "area": "面积（平米）",
+    "manFee": "物业费（元/月）",
+    "residentID": "户主ID",
+    "residentName": "户主名",
+    "residentPhoneNumber": "手机号码",
+    "costs": "价格（元）",
+    "issueDate": "入住时间"
   }
 }
