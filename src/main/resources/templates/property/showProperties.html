@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>闲置房屋信息</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/form.css"/>
+</head>
+<body>
+<div id="wrapper">
+    <div id="main" class="container">
+        <div id="header">
+            <div th:replace="~{header :: head-property}"></div>
+        </div>
+        <br>
+        <a class="btn btn-primary" href="idle">
+            选择房屋 <span class="badge" th:if="${residenceID}!=null" th:text="${residenceID}"></span>
+        </a>
+        <div class="bd-example">
+            <form id="show-form">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">房屋ID</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">手机号</th>
+                        <th scope="col">提交</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="list">
+                            <input type="number" class="form-control" th:value="${residenceID}">
+                        </td>
+                        <td class="list">
+                            <input type="text" class="form-control" placeholder="姓名">
+                        </td>
+                        <td class="list">
+                            <input type="text" class="form-control" placeholder="手机号">
+                        </td>
+                        <td class="list">
+                            <input type="submit" class="btn btn-primary">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" th:each="field: ${fields}" th:text="${FOEMap[field.getName()]}"></th>
+                <th scope="col">解除绑定</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="emp, status: ${residenceList}">
+                <th scope="row" th:text="|${status.count}|"></th>
+                <td class="list" th:each="field: ${fields}" th:text="${emp[field.getName()]}"></td>
+                <td class="list"><a th:href="'addResident?id='+|'${emp[fields.get(0).getName()]}'|">解除绑定</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+</div>
+</body>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/getRowInfo.js"></script>
+<script src="/js/search.js"></script>
+</html>

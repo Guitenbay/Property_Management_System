@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show User</title>
+    <title>车位信息</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
@@ -27,8 +27,6 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary mr-sm-0 col-1">Insert</button>
-                </button>
-
             </form>
         </div>
 
@@ -37,16 +35,18 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col" th:each="field: ${fields}" th:text="${FOEMap[field.getName()]}"></th>
-                <th scope="col">编辑确认</th>
-                <th scope="col">删除</th>
+                <th scope="col" th:if="${type}=='i'">绑定</th>
+                <th scope="col" th:unless="${type}=='i'">解除绑定</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="emp, status: ${pksList}">
                 <th scope="row" th:text="|${status.count}|"></th>
                 <td class="list" th:each="field: ${fields}" th:text="${emp[field.getName()]}"></td>
-                <td class="list"><a href="#">编辑确认</a></td>
-                <td class="list"><a href="#">删除</a></td>
+                <td class="list" th:switch="${type}">
+                    <a th:case="i" th:href="bind">绑定</a>
+                    <a th:case="*" th:href="unbind">解除绑定</a>
+                </td>
             </tr>
             </tbody>
         </table>
