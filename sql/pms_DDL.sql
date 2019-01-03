@@ -44,7 +44,7 @@ CREATE TABLE residence (
 CREATE TABLE residence_record (
 	community_id	varchar(8) NOT NULL,
 	residence_id	varchar(8) NOT NULL,
-	residence_state	varchar(5) CHECK (residence_state IN ('YES', 'NO')),
+	residence_state	varchar(5) CHECK (residence_state IN ('IDLE', 'BUSY')),
 	PRIMARY KEY (community_id, residence_id),
 	FOREIGN KEY (community_id) REFERENCES community(community_id) ON DELETE CASCADE,
 	FOREIGN KEY (residence_id) REFERENCES residence(residence_id)
@@ -72,7 +72,7 @@ CREATE TABLE parking_space (
 	community_id	varchar(8) NOT NULL,
 	pks_state	varchar(10) DEFAULT 'IDLE' CHECK (pks_state IN ('IDLE', 'BUSY')),
 	pks_type	varchar(15) CHECK (pks_type IN ('TEMPORARY', 'RENTED', 'PURCHASED')),
-	PRIMARY KEY (pks_id, community_id),
+	PRIMARY KEY (pks_id),
 	FOREIGN KEY (community_id) REFERENCES community(community_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -80,6 +80,7 @@ CREATE TABLE temporary_pks (
 	pks_id		varchar(6) NOT NULL,
 	discount  numeric(2, 2) CHECK (discount >= 0 AND discount <= 1),
 	discount_price numeric(20, 2) CHECK (discount_price >= 0),
+	FOREIGN KEY (pks_id) REFERENCES parking_space(pks_id) ON DELETE CASCADE,
 	PRIMARY KEY (pks_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -88,6 +89,7 @@ CREATE TABLE rented_pks (
 	resident_id	varchar(8) NOT NULL,
 	man_fee		numeric(8, 2) DEFAULT 0 CHECK (man_fee >= 0),
 	PRIMARY KEY (pks_id),
+	FOREIGN KEY (pks_id) REFERENCES parking_space(pks_id) ON DELETE CASCADE,
 	FOREIGN KEY (resident_id) REFERENCES resident(resident_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -96,6 +98,7 @@ CREATE TABLE purchased_pks (
 	resident_id	varchar(8) NOT NULL,
 	man_fee		numeric(8, 2) DEFAULT 0 CHECK (man_fee >= 0),
 	PRIMARY KEY (pks_id),
+	FOREIGN KEY (pks_id) REFERENCES parking_space(pks_id) ON DELETE CASCADE,
 	FOREIGN KEY (resident_id) REFERENCES resident(resident_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
