@@ -2,42 +2,25 @@ package com.example.pms.bean;
 
 public class PropertyRecord {
     //房产记录
-    private String residentID;
+    private int residentID;
     private String residentName;
     private String residentPhoneNumber;
-    private String communityID;
+    private int communityID;
     private String communityName;
-    private String residenceID;
-    private String issueDate;
-    private String floor;
-    private String unit;
-    private String room;
+    private int residenceID;
+    private int floor;
+    private int unit;
+    private int room;
     private double area;
-    private double fee;
+    private double costs;
+    private String issueDate;
 
-
-    public String getResidentID() {
+    public int getResidentID() {
         return residentID;
     }
 
-    public void setResidentID(String residentID) {
+    public void setResidentID(int residentID) {
         this.residentID = residentID;
-    }
-
-    public String getResidenceID() {
-        return residenceID;
-    }
-
-    public void setResidenceID(String residenceID) {
-        this.residenceID = residenceID;
-    }
-
-    public String getCommunityID() {
-        return communityID;
-    }
-
-    public void setCommunityID(String communityID) {
-        this.communityID = communityID;
     }
 
     public String getResidentName() {
@@ -56,6 +39,14 @@ public class PropertyRecord {
         this.residentPhoneNumber = residentPhoneNumber;
     }
 
+    public int getCommunityID() {
+        return communityID;
+    }
+
+    public void setCommunityID(int communityID) {
+        this.communityID = communityID;
+    }
+
     public String getCommunityName() {
         return communityName;
     }
@@ -64,35 +55,35 @@ public class PropertyRecord {
         this.communityName = communityName;
     }
 
-    public String getIssueDate() {
-        return issueDate;
+    public int getResidenceID() {
+        return residenceID;
     }
 
-    public void setIssueDate(String issueDate) {
-        this.issueDate = issueDate;
+    public void setResidenceID(int residenceID) {
+        this.residenceID = residenceID;
     }
 
-    public String getFloor() {
+    public int getFloor() {
         return floor;
     }
 
-    public void setFloor(String floor) {
+    public void setFloor(int floor) {
         this.floor = floor;
     }
 
-    public String getUnit() {
+    public int getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(int unit) {
         this.unit = unit;
     }
 
-    public String getRoom() {
+    public int getRoom() {
         return room;
     }
 
-    public void setRoom(String room) {
+    public void setRoom(int room) {
         this.room = room;
     }
 
@@ -104,13 +95,19 @@ public class PropertyRecord {
         this.area = area;
     }
 
-    public double getFee() {
-        return fee;
+    public double getCosts() {
+        return costs;
     }
 
-    public void setFee(double fee) {
-        this.fee = fee;
+    public void setCosts(double costs) {
+        this.costs = costs;
     }
 
+    public String getIssueDate() {
+        return issueDate;
+    }
 
+    public void setIssueDate(String issueDate) {
+        this.issueDate = issueDate;
+    }
 }
