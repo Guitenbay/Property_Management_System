@@ -4,5 +4,12 @@
     "age": "Age",
     "id": "ID",
     "email": "Email"
+  },
+  "Pks": {
+    "id": "ID",
+    "communityID": "Community ID",
+    "communityName": "Community Name",
+    "state": "State",
+    "type": "Type"
   }
 }
