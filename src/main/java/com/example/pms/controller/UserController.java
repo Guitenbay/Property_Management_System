@@ -25,8 +25,8 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
 
-    @RequestMapping(value="/")
-    public ModelAndView getUsersInfoByName(){
+    @RequestMapping(value = "/")
+    public ModelAndView getUsersInfoByName() {
         ModelAndView modelAndView = new ModelAndView("/showUser");
 
         List<User> users = userMapper.findUsers();
@@ -47,8 +47,8 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/info")
-    public String getUserInfoByName(String id){
+    @RequestMapping(value = "/info")
+    public String getUserInfoByName(String id) {
         JSONObject jsonObject = new JSONObject();
 
         User user = userMapper.findUserById(id);
