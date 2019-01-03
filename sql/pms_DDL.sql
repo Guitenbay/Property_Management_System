@@ -156,6 +156,7 @@ CREATE TABLE equipment (
 	equipment_id	  INT NOT NULL AUTO_INCREMENT,
 	category	      varchar(10) NOT NULL,
 	equipment_type	varchar(64) NOT NULL,
+	description     varchar(1024) NOT NULL,
 	PRIMARY KEY (equipment_id),
 	FOREIGN KEY (category, equipment_type) REFERENCES equipment_info(category, equipment_type) ON DELETE CASCADE
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
