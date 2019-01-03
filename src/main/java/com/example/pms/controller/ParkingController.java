@@ -1,8 +1,8 @@
 package com.example.pms.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.pms.bean.BusyPks;
 import com.example.pms.bean.ParkingSpace;
-import com.example.pms.bean.User;
 import com.example.pms.dao.ParkingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,46 +24,49 @@ public class ParkingController {
     @Autowired
     ParkingMapper parkingMapper;
 
-    @RequestMapping("/")
+    @RequestMapping({"/index", "/"})
     public ModelAndView handleRequest() {
         return new ModelAndView("index/parking");
     }
 
     @RequestMapping("/idle")
     public ModelAndView listIdlePks() {
-        ModelAndView mav = new ModelAndView("pks/showPks");
-        List<ParkingSpace> pkses = parkingMapper.listIdlePkses();
-        addPksObjects(mav, pkses);
+        ModelAndView mav = new ModelAndView("pks/showPkses");
+        addPksObjects(mav, parkingMapper.listIdlePkses(), ParkingSpace.class);
+        mav.addObject("type", "i");
         return mav;
     }
 
     @RequestMapping("/purchase")
     public ModelAndView addPurchasePks() {
-        ModelAndView mav = new ModelAndView("pks/showPks");
-        addPksObjects(mav, parkingMapper.listPurchasePkses());
+        ModelAndView mav = new ModelAndView("pks/showPkses");
+        addPksObjects(mav, parkingMapper.listPurchasePkses(), BusyPks.class);
+        mav.addObject("type", "p");
         return mav;
     }
 
     @RequestMapping("/rent")
     public ModelAndView addRentalPks() {
-        ModelAndView mav = new ModelAndView("pks/showPks");
-        addPksObjects(mav, parkingMapper.listRentalPkses());
+        ModelAndView mav = new ModelAndView("pks/showPkses");
+        addPksObjects(mav, parkingMapper.listRentalPkses(), BusyPks.class);
+        mav.addObject("type", "r");
         return mav;
     }
 
 
     @RequestMapping("/temporary")
     public ModelAndView addTemporaryPks() {
-        ModelAndView mav = new ModelAndView("pks/showPks");
-        addPksObjects(mav, parkingMapper.listTemporaryPkses());
+        ModelAndView mav = new ModelAndView("pks/showPkses");
+        addPksObjects(mav, parkingMapper.listTemporaryPkses(), BusyPks.class);
+        mav.addObject("type", "t");
         return mav;
     }
 
 
-    private void addPksObjects(ModelAndView mav, List<ParkingSpace> pkses) {
-        List<Field> fields = Arrays.asList(ParkingSpace.class.getDeclaredFields());
+    private <T extends Object> void addPksObjects(ModelAndView mav, List<T> pkses, Class type) {
+        List<Field> fields = Arrays.asList(type.getDeclaredFields());
         String str = readFile(FILE_PATH);
-        JSONObject fieldOfPks = stringToJSONObject(str, "Pks");
+        JSONObject fieldOfPks = stringToJSONObject(str, "ParkingSpace_zh");
         Map<String, String> fieldOfPksMap = JSONObject.toJavaObject(fieldOfPks, Map.class);
         mav.addObject("pksList", pkses);
         mav.addObject("fields", fields);

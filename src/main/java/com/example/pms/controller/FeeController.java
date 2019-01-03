@@ -8,8 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/fee")
 public class FeeController {
 
-    @RequestMapping("/")
+    @RequestMapping({"/index", "/"})
     public ModelAndView handleRequest() {
-        return new ModelAndView("/index/fee");
+        return new ModelAndView("index/fee");
     }
 }
