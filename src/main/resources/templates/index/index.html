@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>物业管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/form.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+</head>
+<body>
+<div id="wrapper">
+    <div id="main" class="container">
+        <div id="header">
+            <div th:replace="~{header :: head-index}"></div>
+        </div>
+        <div class="page-header">
+            <h1 th:text="${title}">　
+            </h1>
+            <small th:text="${desc}"></small>
+        </div>
+    </div>
+    <div id="footer">
+        <div th:replace="~{footer :: foot-fragment}"></div>
+    </div>
+</div>
+</body>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+</html>
