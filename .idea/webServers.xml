@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="05dd7393-c1fb-44cf-bb31-7cffe9fe1188" name="pms" url="http://xyxhjj.cn">
+        <fileTransfer host="xyxhjj.cn" port="22" rootFolder="/webdata/pms" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
