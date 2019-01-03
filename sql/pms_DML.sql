@@ -14,3 +14,34 @@ INSERT INTO equipment_info VALUES('INDOOR', '水闸', 1, 10);
 INSERT INTO equipment_info VALUES('INDOOR', '电闸', 1, 20);
 
 
+INSERT INTO parking_space VALUES('pks1', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks2', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks3', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks4', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks5', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks6', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks7', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks8', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks9', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks10', 'c1', 'IDLE', 'PURCHASED');
+INSERT INTO parking_space VALUES('pks11', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks12', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks13', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks14', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks15', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks16', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks17', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks18', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks19', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks20', 'c1', 'IDLE', 'RENTED');
+INSERT INTO parking_space VALUES('pks21', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks22', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks23', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks24', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks25', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks26', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks27', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks28', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks29', 'c1', 'IDLE', 'TEMPORARY');
+INSERT INTO parking_space VALUES('pks30', 'c1', 'IDLE', 'TEMPORARY');
+

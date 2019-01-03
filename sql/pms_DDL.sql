@@ -78,6 +78,8 @@ CREATE TABLE parking_space (
 
 CREATE TABLE temporary_pks (
 	pks_id		varchar(6) NOT NULL,
+	discount  numeric(2, 2) CHECK (discount >= 0 AND discount <= 1),
+	discount_price numeric(20, 2) CHECK (discount_price >= 0),
 	PRIMARY KEY (pks_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
