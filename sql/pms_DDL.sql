@@ -28,7 +28,8 @@ CREATE TABLE community (
 	community_name		varchar(255) NOT NULL,
 	pks_purchase_fee	numeric(20, 2) CHECK (pks_purchase_fee >= 0),
 	pks_rental_fee		numeric(15, 2) CHECK (pks_rental_fee >= 0),
-	residence_price		numeric(10, 2) CHECK (residence_price >= 0),
+	residence_price		numeric(10, 2) DEFAULT 0 CHECK (residence_price >= 0),
+	residence_man_price numeric(5, 2) DEFAULT 0 CHECK (residence_man_price >=0)
 	PRIMARY KEY (community_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic; 
 
@@ -51,14 +52,14 @@ CREATE TABLE residence_record (
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE resident (
-	resident_id	  INT NOT NULL AUTO_INCREMENT,
+	resident_id	  char(18) NOT NULL,
 	resident_name	varchar(255) NOT NULL,
 	phonenumber	varchar(255),
 	PRIMARY KEY (resident_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE property_record (
-	resident_id	  INT NOT NULL,
+	resident_id	  char(18) NOT NULL,
 	residence_id	INT NOT NULL,
 	issue_date	timestamp NOT NULL,
 	purchased_fee	numeric(20, 2) CHECK (purchased_fee >= 0),
@@ -92,7 +93,7 @@ CREATE TABLE temporary_pks (
 
 CREATE TABLE rented_pks (
 	pks_id		INT NOT NULL,
-	resident_id	INT,
+	resident_id	char(18),
 	discount  numeric(2, 2) CHECK (discount >= 0 AND discount <= 1),
 	discount_price numeric(20, 2) CHECK (discount_price >= 0),
 	man_fee		numeric(8, 2) DEFAULT 0 CHECK (man_fee >= 0),
@@ -103,7 +104,7 @@ CREATE TABLE rented_pks (
 
 CREATE TABLE purchased_pks (
 	pks_id		  INT NOT NULL,
-	resident_id	INT,
+	resident_id	char(18),
 	man_fee		numeric(8, 2) DEFAULT 0 CHECK (man_fee >= 0),
 	PRIMARY KEY (pks_id),
 	FOREIGN KEY (pks_id) REFERENCES parking_space(pks_id) ON DELETE CASCADE,
@@ -121,7 +122,7 @@ CREATE TABLE payment_record (
 
 CREATE TABLE property_fee_record (
 	payment_id	INT NOT NULL,
-	resident_id	INT NOT NULL,
+	resident_id	char(18) NOT NULL,
 	PRIMARY KEY (payment_id, resident_id),
 	FOREIGN KEY (payment_id) REFERENCES payment_record(payment_id) ON DELETE CASCADE,
 	FOREIGN KEY (resident_id) REFERENCES resident(resident_id)
@@ -172,7 +173,7 @@ CREATE TABLE equipment_record (
 
 CREATE TABLE repair_order (
 	repair_id	  INT NOT NULL AUTO_INCREMENT,
-	resident_id	INT NOT NULL,
+	resident_id	char(18) NOT NULL,
 	equipment_id	INT NOT NULL,
 	issue_date	timestamp NOT NULL,
 	repair_reason	varchar(1024),

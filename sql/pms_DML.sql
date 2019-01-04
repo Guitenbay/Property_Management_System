@@ -13,7 +13,7 @@ INSERT INTO equipment_info VALUES('INDOOR', '楼层照明灯', 1, 10);
 INSERT INTO equipment_info VALUES('INDOOR', '水闸', 1, 10);
 INSERT INTO equipment_info VALUES('INDOOR', '电闸', 1, 20);
 
-INSERT INTO `resident`(resident_name, phonenumber) VALUES ('张健', '18717723912');
+INSERT INTO `resident`(resident_id, resident_name, phonenumber) VALUES ('522422199810113213', '张健', '18717723912');
 
 INSERT INTO `residence`(floor_num, unit_num, room_num, area) VALUES (6, 4, 1, 60.00);
 INSERT INTO `residence`(floor_num, unit_num, room_num, area) VALUES (6, 4, 10, 50.00);
@@ -30,7 +30,7 @@ INSERT INTO `residence`(floor_num, unit_num, room_num, area) VALUES (6, 4, 8, 50
 INSERT INTO `residence`(floor_num, unit_num, room_num, area) VALUES (6, 4, 9, 50.00);
 
 
-INSERT INTO property_record VALUES (1, 9, '2019-01-03 15:18:36', 2000000.00);
+INSERT INTO property_record VALUES ('522422199810113213', 9, '2019-01-03 15:18:36', 2000000.00);
 
 INSERT INTO `residence_record` VALUES (1, 1, 'IDLE');
 INSERT INTO `residence_record` VALUES (1, 10, 'IDLE');
@@ -78,6 +78,6 @@ INSERT INTO parking_space VALUES(28, 1, 'IDLE', 'TEMPORARY');
 INSERT INTO parking_space VALUES(29, 1, 'IDLE', 'TEMPORARY');
 INSERT INTO parking_space VALUES(30, 1, 'IDLE', 'TEMPORARY');
 
-INSERT INTO purchased_pks VALUES (1, 1, 50.00);
+INSERT INTO purchased_pks VALUES (1, '522422199810113213', 50.00);
 
 
