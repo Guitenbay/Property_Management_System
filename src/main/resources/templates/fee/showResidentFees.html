@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>闲置房屋信息</title>
+    <title>住户需缴纳费用账单</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
@@ -17,18 +17,33 @@
         </div>
         <br>
         <table class="table table-bordered table-striped">
+            <caption>物业费记录</caption>
             <thead class="thead-dark">
             <tr>
-                <th scope="col" th:text="'#'+${residenceList.size()}"></th>
-                <th scope="col" th:each="field: ${fields}" th:text="${FOEMap[field.getName()]}"></th>
-                <th scope="col">绑定户主</th>
+                <th scope="col" th:text="'#'+${propertyFeeList.size()}"></th>
+                <th scope="col" th:each="field: ${propertyFeeFields}" th:text="${FOEMap[field.getName()]}"></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="emp, status: ${residenceList}">
+            <tr th:each="emp, status: ${propertyFeeList}">
                 <th scope="row" th:text="|${status.count}|"></th>
-                <td class="list" th:each="field: ${fields}" th:text="${emp[field.getName()]}"></td>
-                <td class="list"><a th:href="'bind?id='+${emp[fields.get(0).getName()]}">绑定</a></td>
+                <td class="list" th:each="field: ${propertyFeeFields}" th:text="${emp[field.getName()]}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered table-striped">
+            <caption>管理费记录</caption>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" th:text="'#'+${managementFeeList.size()}"></th>
+                <th scope="col" th:each="field: ${managementFeeFields}" th:text="${FOEMap[field.getName()]}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="emp, status: ${managementFeeList}">
+                <th scope="row" th:text="|${status.count}|"></th>
+                <td class="list" th:each="field: ${managementFeeFields}" th:text="${emp[field.getName()]}"></td>
             </tr>
             </tbody>
         </table>

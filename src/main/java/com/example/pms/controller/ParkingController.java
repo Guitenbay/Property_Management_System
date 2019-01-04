@@ -63,7 +63,7 @@ public class ParkingController {
     }
 
 
-    private <T extends Object> void addPksObjects(ModelAndView mav, List<T> pkses, Class type) {
+    private void addPksObjects(ModelAndView mav, List pkses, Class type) {
         List<Field> fields = Arrays.asList(type.getDeclaredFields());
         String str = readFile(FILE_PATH);
         JSONObject fieldOfPks = stringToJSONObject(str, "ParkingSpace_zh");

@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>闲置房屋信息</title>
+    <title>房产信息</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
@@ -20,12 +20,13 @@
             选择房屋 <span class="badge" th:if="${residenceID}!=null" th:text="${residenceID}"></span>
         </a>
         <div class="bd-example">
-            <form id="show-form">
+            <form id="show-form" action="addResident">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">房屋ID</th>
                         <th scope="col">姓名</th>
+                        <th scope="col">身份证号</th>
                         <th scope="col">手机号</th>
                         <th scope="col">提交</th>
                     </tr>
@@ -33,16 +34,19 @@
                     <tbody>
                     <tr>
                         <td class="list">
-                            <input type="number" class="form-control" th:value="${residenceID}">
+                            <input type="number" class="form-control" name="residenceID" th:value="${residenceID}">
                         </td>
                         <td class="list">
-                            <input type="text" class="form-control" placeholder="姓名">
+                            <input type="text" class="form-control" name="residentName" value="">
                         </td>
                         <td class="list">
-                            <input type="text" class="form-control" placeholder="手机号">
+                            <input type="text" class="form-control" name="residentID" value="">
                         </td>
                         <td class="list">
-                            <input type="submit" class="btn btn-primary">
+                            <input type="text" class="form-control" name="phoneNumber" value="">
+                        </td>
+                        <td class="list">
+                            <input type="submit" class="btn btn-primary" th:value="确认">
                         </td>
                     </tr>
                     </tbody>
@@ -52,7 +56,7 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col" th:text="'#'+${residenceList.size()}"></th>
                 <th scope="col" th:each="field: ${fields}" th:text="${FOEMap[field.getName()]}"></th>
                 <th scope="col">解除绑定</th>
             </tr>

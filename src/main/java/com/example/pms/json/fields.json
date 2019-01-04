@@ -8,7 +8,7 @@
     "holderID": "车主ID/车牌号",
     "holder": "车主"
   },
-  "Residence_zh": {
+  "Attrs_zh": {
     "residenceID": "房屋ID",
     "communityID": "小区ID",
     "communityName": "小区名",
@@ -16,11 +16,15 @@
     "unit": "单元号",
     "room": "房间号",
     "area": "面积（平米）",
-    "manFee": "物业费（元/月）",
+    "propertyFee": "物业费（元/月）",
     "residentID": "户主ID",
     "residentName": "户主名",
     "residentPhoneNumber": "手机号码",
     "costs": "价格（元）",
-    "issueDate": "入住时间"
+    "issueDate": "入住时间",
+    "manFee": "管理费（元）",
+    "residencePrice": "房价（元/平米）",
+    "pks_id": "车位ID",
+    "paid": "是否缴纳"
   }
 }

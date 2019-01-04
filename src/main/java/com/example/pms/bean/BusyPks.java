@@ -7,6 +7,7 @@ public class BusyPks {
     private String state;
     private String type;
     private String holderID;
+    private String holder;
 
     public int getId() {
         return id;
@@ -63,7 +64,4 @@ public class BusyPks {
     public void setHolder(String holder) {
         this.holder = holder;
     }
-
-    private String holder;
-
 }

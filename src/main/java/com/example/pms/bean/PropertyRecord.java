@@ -2,9 +2,9 @@ package com.example.pms.bean;
 
 public class PropertyRecord {
     //房产记录
-    private int residentID;
+    private String residentID;
     private String residentName;
-    private String residentPhoneNumber;
+    private String phoneNumber;
     private int communityID;
     private String communityName;
     private int residenceID;
@@ -15,11 +15,11 @@ public class PropertyRecord {
     private double costs;
     private String issueDate;
 
-    public int getResidentID() {
+    public String getResidentID() {
         return residentID;
     }
 
-    public void setResidentID(int residentID) {
+    public void setResidentID(String residentID) {
         this.residentID = residentID;
     }
 
@@ -31,12 +31,12 @@ public class PropertyRecord {
         this.residentName = residentName;
     }
 
-    public String getResidentPhoneNumber() {
-        return residentPhoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setResidentPhoneNumber(String residentPhoneNumber) {
-        this.residentPhoneNumber = residentPhoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getCommunityID() {

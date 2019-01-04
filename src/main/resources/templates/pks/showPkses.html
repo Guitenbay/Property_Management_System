@@ -33,7 +33,7 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col" th:text="'#'+${pksList.size()}"></th>
                 <th scope="col" th:each="field: ${fields}" th:text="${FOEMap[field.getName()]}"></th>
                 <th scope="col" th:if="${type}=='i'">绑定</th>
                 <th scope="col" th:unless="${type}=='i'">解除绑定</th>
@@ -44,7 +44,7 @@
                 <th scope="row" th:text="|${status.count}|"></th>
                 <td class="list" th:each="field: ${fields}" th:text="${emp[field.getName()]}"></td>
                 <td class="list" th:switch="${type}">
-                    <a th:case="i" th:href="bind">绑定</a>
+                    <a th:case="i" th:href="'bind?id='+${emp['pks_id']}">绑定</a>
                     <a th:case="*" th:href="unbind">解除绑定</a>
                 </td>
             </tr>
