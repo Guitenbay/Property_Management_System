@@ -41,20 +41,9 @@ public interface ParkingMapper {
     @Update("update parking_space set pks_state = #{state}, pks_type = #{type} where pks_id = #{pksID}")
     void updatePksState(@Param("pksID") int pksID, @Param("state") String state, @Param("type") String type);
 
-    @Insert("insert into payment_record(payment, duration, start_time, checked, math) " +
-            "values(#{payment}, #{duration}, current_timestamp, #{checked}, #{math})")
-    @Options(useGeneratedKeys = true, keyProperty = "paymentRecord.paymentID")
-    void insertPaymentRecord(@Param("payment") double payment, @Param("duration") int duration,
-                             @Param("checked") String checked, @Param("math") String math,
-                             @Param("paymentRecord") PaymentRecord paymentRecord);
-
-    @Update("update payment_record set checked = 'YES' where payment_id = #{paymentID}")
-    void updatePaymentRecordState(@Param("paymentID") int paymentID);
-
     @Insert("insert into pks_fee_record values(#{paymentID}, #{pksID}, #{desc}) " +
             "on duplicate key update description = #{desc}")
     void bindPksPaymentRecord(@Param("pksID") int pksID, @Param("paymentID") int paymentID, @Param("desc") String desc);
-
 
     @Select("select pks_id as pksID, " +
             "community_id as communityID, " +

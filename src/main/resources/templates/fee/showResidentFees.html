@@ -16,41 +16,110 @@
             <div th:replace="~{header :: head-property}"></div>
         </div>
         <br>
-        <div class="bd-example">
-            <form class="row" id="search_fee_form" th:action="@{searchFee}" method="post">
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addonFrom">月度（选择月份）</span>
-                        <input type="date" class="form-control" th:name="fromMonthly" aria-describedby="basic-addonFrom"
-                               th:value="2019-01-01">
-                        <span class="input-group-addon">
+        <form class="row" id="search_fee_form" th:action="@{searchFee}" method="post">
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addonFrom">月度（选择月份）</span>
+                    <input type="date" class="form-control" th:name="fromMonthly" aria-describedby="basic-addonFrom"
+                           th:value="2019-01-01">
+                    <span class="input-group-addon">
                             <input type="radio" aria-label="..." th:name="reportType" th:value="m" checked>
                         </span>
-                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addonTo">季度（选择起始月份）</span>
-                        <input type="date" class="form-control" th:name="fromQuarter" aria-describedby="basic-addonTo"
-                               th:value="2019-01-01">
-                        <span class="input-group-addon">
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addonTo">季度（选择起始月份）</span>
+                    <input type="date" class="form-control" th:name="fromQuarter" aria-describedby="basic-addonTo"
+                           th:value="2019-01-01">
+                    <span class="input-group-addon">
                             <input type="radio" aria-label="..." th:name="reportType" th:value="q">
                         </span>
-                    </div>
                 </div>
-                <div class="col-lg-2">
-                    <div class="input-group">
-                        <input type="text" disabled class="form-control" aria-label="..." th:value="缴费">
-                        <span class="input-group-addon">
+            </div>
+            <div class="col-lg-2">
+                <div class="input-group">
+                    <input type="text" disabled class="form-control" aria-label="..." th:value="缴费">
+                    <span class="input-group-addon">
                             <input type="checkbox" aria-label="..." th:name="paid" checked>
                         </span>
-                    </div>
                 </div>
-                <div class="col-lg-2">
-                    <input type="submit" class="btn" th:value="筛选">
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="col-lg-2">
+                <input type="submit" class="btn" th:value="筛选">
+            </div>
+        </form>
+        <br>
+        <form id="show-property-fee" th:action="@{addPropertyFee}" method="post">
+            <table class="table table-bordered table-striped">
+                <caption>添加物业费记录</caption>
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">户主ID</th>
+                    <th scope="col">房屋ID</th>
+                    <th scope="col">物业费</th>
+                    <th scope="col">是否缴纳</th>
+                    <th scope="col">提交</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="list">
+                        <input type="text" class="form-control" name="residentID" value="">
+                    </td>
+                    <td class="list">
+                        <input type="number" class="form-control" min="0" name="residenceID" value="">
+                    </td>
+                    <td class="list">
+                        <input type="number" class="form-control" min="0.00" step="0.01" name="propertyFee"
+                               value="">
+                    </td>
+                    <td class="list" align="center">
+                        <input type="checkbox" aria-label="..." name="paid" checked>
+                    </td>
+                    <td class="list">
+                        <input type="submit" class="btn btn-primary" th:value="确认">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <br>
+        <form id="show-management-fee" th:action="@{addManagementFee}" method="post">
+            <table class="table table-bordered table-striped">
+                <caption>添加管理费记录</caption>
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">户主ID</th>
+                    <th scope="col">车位ID</th>
+                    <th scope="col">管理费</th>
+                    <th scope="col">是否缴纳</th>
+                    <th scope="col">提交</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="list">
+                        <input type="text" class="form-control" name="residentID" value="">
+                    </td>
+                    <td class="list">
+                        <input type="number" class="form-control" min="0" name="pksID" value="">
+                    </td>
+                    <td class="list">
+                        <input type="number" class="form-control" min="0.00" step="0.01" name="managementFee"
+                               value="">
+                    </td>
+                    <td class="list" align="center">
+                        <input type="checkbox" aria-label="..." name="paid" checked>
+                    </td>
+                    <td class="list">
+                        <input type="submit" class="btn btn-primary" th:value="确认">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <br>
         <table class="table table-bordered table-striped">
             <caption th:text="'物业费记录：共' + ${propertyFeeList.size()} + '条'"></caption>
             <thead class="thead-dark">

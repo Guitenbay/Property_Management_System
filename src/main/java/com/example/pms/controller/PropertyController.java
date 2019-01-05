@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.pms.bean.*;
 import com.example.pms.dao.FeeMapper;
 import com.example.pms.dao.PropertyMapper;
+import com.example.pms.service.FeeService;
 import com.example.pms.service.PropertyService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class PropertyController {
 
     @Autowired
     private FeeMapper feeMapper;
+
+    @Autowired
+    private FeeService feeService;
     private String str = readFile(FILE_PATH);
     private JSONObject fieldOfObjs = stringToJSONObject(str, "Attrs_zh");
     private Map<String, String> fieldOfObjMap = JSONObject.toJavaObject(fieldOfObjs, Map.class);
@@ -121,7 +125,6 @@ public class PropertyController {
         }
         java.sql.Date sqlFrom = new java.sql.Date(from.getTime());
         java.sql.Date sqlTo = new java.sql.Date(to.getTime());
-        System.out.println(residentFeeSearch.getReportType() + "-> from: " + sqlFrom + " to: " + sqlTo + "  paid: " + residentFeeSearch.isPaid());
         List<Field> propertyFeeFields = Arrays.asList(PropertyFeeRecord.class.getDeclaredFields());
         List<Field> managementFeeFields = Arrays.asList(ManagementFeeRecord.class.getDeclaredFields());
         mav.addObject("FOEMap", fieldOfObjMap);
@@ -133,9 +136,22 @@ public class PropertyController {
         } else {
             mav.addObject("propertyFeeList", feeMapper.listProFeesNeeded());
             mav.addObject("managementFeeList", feeMapper.listManFeesNeeded());
-
         }
         mav.addObject("title", "筛选住户需缴纳费用账单");
+        return mav;
+    }
+
+    @RequestMapping(value = "/addPropertyFee", method = RequestMethod.POST)
+    public ModelAndView addPropertyFee(String residentID, int residenceID, double propertyFee, boolean paid) {
+        ModelAndView mav = new ModelAndView("redirect:fee");
+        feeService.addPropertyFee(residentID, residenceID, propertyFee, paid);
+        return mav;
+    }
+
+    @RequestMapping(value = "/addManagementFee", method = RequestMethod.POST)
+    public ModelAndView addManagementFee(String residentID, int pksID, double managementFee, boolean paid) {
+        ModelAndView mav = new ModelAndView("redirect:fee");
+        feeService.addManagementFee(residentID, pksID, managementFee, paid);
         return mav;
     }
 
@@ -145,4 +161,6 @@ public class PropertyController {
         mav.addObject("fields", fields);
         mav.addObject("FOEMap", fieldOfObjMap);
     }
+
+
 }

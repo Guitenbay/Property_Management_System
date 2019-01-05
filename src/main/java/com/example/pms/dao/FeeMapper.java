@@ -2,10 +2,9 @@ package com.example.pms.dao;
 
 
 import com.example.pms.bean.ManagementFeeRecord;
+import com.example.pms.bean.PaymentRecord;
 import com.example.pms.bean.PropertyFeeRecord;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -15,9 +14,31 @@ import java.util.List;
  * 物业费缴纳接口
  */
 @Mapper
-@Component("propertyFeeMapper")
+@Component("feeMapper")
 public interface FeeMapper {
-    void create(String residentID, String residenceID, double fee);
+
+
+    @Insert("insert into payment_record(payment, duration, start_time, checked, math) " +
+            "values(#{payment}, #{duration}, current_timestamp, #{checked}, #{math})")
+    @Options(useGeneratedKeys = true, keyProperty = "paymentRecord.paymentID")
+    void insertPaymentRecord(@Param("payment") double payment, @Param("duration") int duration,
+                             @Param("checked") String checked, @Param("math") String math,
+                             @Param("paymentRecord") PaymentRecord paymentRecord);
+
+    @Update("update payment_record set checked = 'YES' where payment_id = #{paymentID}")
+    void updatePaymentRecordState(@Param("paymentID") int paymentID);
+
+    @Insert("insert into property_fee_record values(#{paymentID}, #{residentID}, #{residenceID})")
+    void bindPropertyPaymentRecord(@Param("residentID") String residentID, @Param("residenceID") int residenceID,
+                                   @Param("paymentID") int paymentID);
+
+    @Insert("insert into pks_management_fee_record values(#{paymentID}, #{pksID})")
+    void bindManagementPaymentRecord(@Param("pksID") int pksID, @Param("paymentID") int paymentID);
+
+
+    @Insert("insert into other_income(income_src_desc, income_issue_date, income_fee) " +
+            "values(#{srcDesc}, #{incomeFee}, current_timestamp) ")
+    void insertOtherIncomeRecord(@Param("incomeFee") double incomeFee, @Param("srcDesc") String srcDesc);
 
     @Select({
             "<script>",
@@ -39,8 +60,8 @@ public interface FeeMapper {
                     "natural join resident " +
                     "natural join residence " +
                     "natural join community ",
-            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>" +
-                    "order by payment_id desc",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
+            "order by payment_id desc",
             "</script>"
     })
     List<PropertyFeeRecord> listProFees(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
@@ -60,6 +81,8 @@ public interface FeeMapper {
                     "from pks_management_fee_record natural join payment_record " +
                     "natural join property_record " +
                     "natural join parking_space " +
+                    "natural join (select * from (select pks_id, resident_id, man_fee from purchased_pks) p_holder " +
+                    "union (select pks_id, resident_id, man_fee from rented_pks )) pr_holder " +
                     "natural join resident " +
                     "natural join residence " +
                     "natural join community ",

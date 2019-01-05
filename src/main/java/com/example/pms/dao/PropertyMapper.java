@@ -1,7 +1,6 @@
 package com.example.pms.dao;
 
 
-import com.example.pms.bean.PropertyFeeRecord;
 import com.example.pms.bean.PropertyRecord;
 import com.example.pms.bean.Residence;
 import org.apache.ibatis.annotations.*;
