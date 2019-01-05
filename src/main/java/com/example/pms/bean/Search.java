@@ -1,13 +1,11 @@
 package com.example.pms.bean;
 
-
 import java.sql.Date;
 
-public class ResidentFeeSearch {
+public class Search {
     private Date fromMonthly;
     private Date fromQuarter;
     private String reportType;
-    private boolean paid;
 
     public Date getFromMonthly() {
         return fromMonthly;
@@ -31,13 +29,5 @@ public class ResidentFeeSearch {
 
     public void setReportType(String reportType) {
         this.reportType = reportType;
-    }
-
-    public boolean isPaid() {
-        return paid;
-    }
-
-    public void setPaid(boolean paid) {
-        this.paid = paid;
     }
 }

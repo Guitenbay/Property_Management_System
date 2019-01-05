@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
-
+<div id="wrapper">
+    <div id="main" class="container">
+        <div id="header">
+            <div th:replace="~{header :: head-equipment}"></div>
+        </div>
+        <br>
+        <table class="table table-bordered table-striped">
+            <caption th:text="${title}+'：共' + ${equipmentList.size()} + '条'"></caption>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" th:text="'#'+${equipmentList.size()}"></th>
+                <th scope="col" th:each="field: ${equipmentFields}" th:text="${FOEMap[field.getName()]}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="emp, status: ${equipmentList}">
+                <th scope="row" th:text="${status.count}"></th>
+                <td class="list" th:each="field: ${equipmentFields}" th:text="${emp[field.getName()]}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+</div>
 </body>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 </html>

@@ -26,6 +26,14 @@
     "pksHours": "停靠时间（小时）",
     "licensePlate": "车牌号",
     "payment": "应收（元）",
-    "ownerName": "车主姓名"
+    "ownerName": "车主姓名",
+    "fee": "费用（元）",
+    "neededRepair": "待维修",
+    "repairFee": "维修费用",
+    "equipmentType": "设备类型",
+    "category": "设备类别",
+    "equipmentDesc": "设备描述",
+    "equipmentID": "设备ID",
+    "repairDate": "维修时间"
   }
 }

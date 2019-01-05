@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
+</head>
+<body>
+<div id="wrapper">
+    <div id="main" class="container">
+        <div id="header">
+            <div th:replace="~{header :: head-fee}"></div>
+        </div>
+        <br>
+        <div th:fragment="other-fee-fragment">
+            <form id="show-property-fee" th:action="@{addOtherFee}" method="post">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">费用</th>
+                        <th scope="col">来源描述</th>
+                        <th scope="col">提交</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="list">
+                            <input type="number" class="form-control" min="0.00" step="0.01" name="otherFee"
+                                   value="">
+                        <td class="list">
+                            <input type="text" class="form-control" name="srcDesc" value="">
+                        </td>
+                        </td>
+                        <td class="list">
+                            <input type="submit" class="btn btn-primary" th:value="确认">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <br>
+        <div th:fragment="other-fee-table-fragment">
+            <table class="table table-bordered table-striped">
+                <caption th:text="'其他收入记录：共' + ${otherFeeList.size()} + '条'"></caption>
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col" th:text="'#'+${otherFeeList.size()}"></th>
+                    <th scope="col" th:each="field: ${otherFeeFields}" th:text="${FOEMap[field.getName()]}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="emp, status: ${otherFeeList}">
+                    <th scope="row" th:text="|${status.count}|"></th>
+                    <td class="list" th:each="field: ${otherFeeFields}" th:text="${emp[field.getName()]}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</html>

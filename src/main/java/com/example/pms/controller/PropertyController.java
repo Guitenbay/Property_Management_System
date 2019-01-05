@@ -6,7 +6,7 @@ import com.example.pms.dao.FeeMapper;
 import com.example.pms.dao.PropertyMapper;
 import com.example.pms.service.FeeService;
 import com.example.pms.service.PropertyService;
-import org.apache.ibatis.annotations.Param;
+import com.example.pms.util.SearchDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +55,7 @@ public class PropertyController {
     }
 
     @RequestMapping("/addResident")
-    public ModelAndView addResident(@Param("propertyRecord") PropertyRecord propertyRecord) {
+    public ModelAndView addResident(PropertyRecord propertyRecord) {
         ModelAndView mav = new ModelAndView("property/showProperties");
         propertyService.addResident(propertyRecord.getResidenceID(), propertyRecord.getResidentID(),
                 propertyRecord.getResidentName(), propertyRecord.getPhoneNumber());
@@ -90,7 +90,7 @@ public class PropertyController {
         mav.addObject("managementFeeFields", managementFeeFields);
         mav.addObject("propertyFeeList", feeMapper.listProFeesNeeded());
         mav.addObject("managementFeeList", feeMapper.listManFeesNeeded());
-        mav.addObject("title", "住户需缴纳费用账单");
+        mav.addObject("title", "住户缴纳费用账单");
         return mav;
     }
 
@@ -104,25 +104,10 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "/searchFee", method = RequestMethod.POST)
-    public ModelAndView searchFeesOfResident(ResidentFeeSearch residentFeeSearch) {
+    public ModelAndView searchFeesOfResident(FeeSearch feeSearch) {
         ModelAndView mav = new ModelAndView("fee/showResidentFees");
-        Date from, to;
-        GregorianCalendar gc = new GregorianCalendar();
-        if (residentFeeSearch.getReportType().equals("m")) {//查询月度报表
-            from = residentFeeSearch.getFromMonthly();
-            gc.setTime(from);
-            gc.set(Calendar.DAY_OF_MONTH, 1);
-            from = gc.getTime();
-            gc.add(Calendar.MONTH, 1);//月份加一
-            to = gc.getTime();
-        } else {//查询季度报表
-            from = residentFeeSearch.getFromQuarter();
-            gc.setTime(from);
-            gc.set(Calendar.DAY_OF_MONTH, 1);
-            from = gc.getTime();
-            gc.add(Calendar.MONTH, 4);//月份加4
-            to = gc.getTime();
-        }
+        Date from = new Date(), to = new Date();
+        SearchDateUtil.getFromToBySearchType(from, to, feeSearch);
         java.sql.Date sqlFrom = new java.sql.Date(from.getTime());
         java.sql.Date sqlTo = new java.sql.Date(to.getTime());
         List<Field> propertyFeeFields = Arrays.asList(PropertyFeeRecord.class.getDeclaredFields());
@@ -130,7 +115,7 @@ public class PropertyController {
         mav.addObject("FOEMap", fieldOfObjMap);
         mav.addObject("propertyFeeFields", propertyFeeFields);
         mav.addObject("managementFeeFields", managementFeeFields);
-        if (residentFeeSearch.isPaid()) {
+        if (feeSearch.isPaid()) {
             mav.addObject("propertyFeeList", feeMapper.listProFees(sqlFrom, sqlTo));
             mav.addObject("managementFeeList", feeMapper.listManFees(sqlFrom, sqlTo));
         } else {

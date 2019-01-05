@@ -1,6 +1,7 @@
 package com.example.pms.dao;
 
 
+import com.example.pms.bean.FeeReport;
 import com.example.pms.bean.ManagementFeeRecord;
 import com.example.pms.bean.PaymentRecord;
 import com.example.pms.bean.PropertyFeeRecord;
@@ -141,5 +142,77 @@ public interface FeeMapper {
             "</script>"
     })
     List<ManagementFeeRecord> listManFeesNeeded();
+
+    @Select({
+            "<script>",
+            "select payment as fee,  " +
+                    "'停车收入' as description, " +
+                    "start_time as issueDate  " +
+                    "from payment_record " +
+                    "natural join pks_fee_record ",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
+            "</script>"
+    })
+    List<FeeReport> listPksIncome(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
+
+    @Select({
+            "<script>",
+            "select payment as fee,  " +
+                    "'停车管理费收入' as description,  " +
+                    "start_time as issueDate  " +
+                    "from payment_record " +
+                    "natural join pks_management_fee_record ",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
+            "</script>"
+    })
+    List<FeeReport> listPksManagementIncome(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
+
+    @Select({
+            "<script>",
+            "select payment as fee,  " +
+                    "'物业费收入' as description,  " +
+                    "start_time as issueDate  " +
+                    "from payment_record " +
+                    "natural join property_fee_record ",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
+            "</script>"
+    })
+    List<FeeReport> listPropertyIncome(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
+
+
+    @Select({
+            "<script>",
+            "select purchased_fee as fee, " +
+                    "'购房收入' as description, " +
+                    "issue_date as issueDate  " +
+                    "from property_record",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where issue_date between #{sqlFrom} and #{sqlTo} </if>",
+            "</script>"
+    })
+    List<FeeReport> listResidenceIncome(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
+
+    @Select({
+            "<script>",
+            "select income_fee as fee, " +
+                    "income_src_desc as description, " +
+                    "income_issue_date as issueDate  " +
+                    "from other_income",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where income_issue_date between #{sqlFrom} and #{sqlTo} </if>",
+            "</script>"
+    })
+    List<FeeReport> listOtherIncome(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
+
+    @Select({
+            "<script>",
+            "select repair_fee as fee, " +
+                    "'维修费用' as description, " +
+                    "issue_date asissueDate  " +
+                    "from maintenance_record " +
+                    "natural join equipment " +
+                    "natural join equipment_info ",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where issue_date between #{sqlFrom} and #{sqlTo} </if>",
+            "</script>"
+    })
+    List<FeeReport> listOutcome(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
 
 }

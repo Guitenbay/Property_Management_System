@@ -13,10 +13,10 @@
 <div id="wrapper">
     <div id="main" class="container">
         <div id="header">
-            <div th:replace="~{header :: head-property}"></div>
+            <div th:replace="~{header :: head-fee}"></div>
         </div>
         <br>
-        <form class="row" id="search_fee_form" th:action="@{searchFee}" method="post">
+        <form class="row" id="search_fee_form" th:action="@{searchFeeReport}" method="post">
             <div class="col-lg-4">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addonFrom">月度（选择月份）</span>
@@ -38,26 +38,18 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <div class="input-group">
-                    <input type="text" disabled class="form-control" aria-label="..." th:value="缴费">
-                    <span class="input-group-addon">
-                            <input type="checkbox" aria-label="..." th:name="paid" checked>
-                        </span>
-                </div>
-            </div>
-            <div class="col-lg-2">
                 <input type="submit" class="btn" th:value="筛选">
             </div>
         </form>
         <br>
-        <div th:replace="~{fee/propertyFee :: property-fee-fragment}"></div>
-        <br>
-        <div th:replace="~{fee/managementFee :: management-fee-fragment}"></div>
-        <br>
-        <div th:replace="~{fee/propertyFee :: property-fee-table-fragment}"></div>
-        <br>
-        <div th:replace="~{fee/managementFee :: management-fee-table-fragment}"></div>
-        <br>
+        <div>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" th:text="'收入总计：'+${totalIn}+'元'"></li>
+                <li role="presentation" th:text="'支出总计：'+${totalOut}+'元'"></li>
+                <li role="presentation" th:text="'盈利：'+(${totalIn}-${totalOut})+'元'"></li>
+            </ul>
+
+        </div>
     </div>
 </div>
 </body>

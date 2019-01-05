@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
+</head>
+<body>
+<div id="wrapper">
+    <div id="main" class="container">
+        <div id="header">
+            <div th:replace="~{header :: head-fee}"></div>
+        </div>
+        <br>
+        <div th:fragment="management-fee-fragment">
+            <form id="show-property-fee" th:action="@{addPropertyFee}" method="post">
+                <table class="table table-bordered table-striped">
+                    <caption>添加物业费记录</caption>
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">户主ID</th>
+                        <th scope="col">房屋ID</th>
+                        <th scope="col">物业费</th>
+                        <th scope="col">是否缴纳</th>
+                        <th scope="col">提交</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="list">
+                            <input type="text" class="form-control" name="residentID" value="">
+                        </td>
+                        <td class="list">
+                            <input type="number" class="form-control" min="0" name="residenceID" value="">
+                        </td>
+                        <td class="list">
+                            <input type="number" class="form-control" min="0.00" step="0.01" name="propertyFee"
+                                   value="">
+                        </td>
+                        <td class="list" align="center">
+                            <input type="checkbox" aria-label="..." name="paid" checked>
+                        </td>
+                        <td class="list">
+                            <input type="submit" class="btn btn-primary" th:value="确认">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <br>
+        <div th:fragment="management-fee-table-fragment">
+            <table class="table table-bordered table-striped">
+                <caption th:text="'物业费记录：共' + ${propertyFeeList.size()} + '条'"></caption>
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col" th:text="'#'+${propertyFeeList.size()}"></th>
+                    <th scope="col" th:each="field: ${propertyFeeFields}" th:text="${FOEMap[field.getName()]}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="emp, status: ${propertyFeeList}">
+                    <th scope="row" th:text="|${status.count}|"></th>
+                    <td class="list" th:each="field: ${propertyFeeFields}" th:text="${emp[field.getName()]}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</html>
