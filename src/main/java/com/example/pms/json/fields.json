@@ -34,6 +34,8 @@
     "category": "设备类别",
     "equipmentDesc": "设备描述",
     "equipmentID": "设备ID",
-    "repairDate": "维修时间"
+    "repairDate": "维修时间",
+    "description": "描述",
+    "feeDate": "时间"
   }
 }

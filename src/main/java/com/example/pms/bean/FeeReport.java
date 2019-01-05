@@ -5,7 +5,7 @@ import java.sql.Date;
 public class FeeReport {
     private double fee;
     private String description;
-    private Date issueDate;
+    private Date feeDate;
 
     public double getFee() {
         return fee;
@@ -23,11 +23,11 @@ public class FeeReport {
         this.description = description;
     }
 
-    public Date getIssueDate() {
-        return issueDate;
+    public Date getFeeDate() {
+        return feeDate;
     }
 
-    public void setIssueDate(Date issueDate) {
-        this.issueDate = issueDate;
+    public void setFeeDate(Date feeDate) {
+        this.feeDate = feeDate;
     }
 }

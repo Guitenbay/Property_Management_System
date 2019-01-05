@@ -1,10 +1,48 @@
 package com.example.pms.dao;
 
+import com.example.pms.bean.ComplaintRecord;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
+
+import java.sql.Date;
+import java.util.List;
 
 @Mapper
 @Component("complaintMapper")
-public class ComplaintMapper {
-
+public interface ComplaintMapper {
+    @Select({
+            "<script>",
+            "select resident_id as residentID, " +
+                    "resident_name as residentName, " +
+                    "community_id as communityID, " +
+                    "community_name as communityName, " +
+                    "unit_num as unit, " +
+                    "floor_num as floor, " +
+                    "room_num as room, " +
+                    "complaint_order.issue_date as issueDate, " +
+                    "category as complaintCategory, " +
+                    "complaint_result as opinion " +
+                    "from complaint_order natural join residence_record " +
+                    "natural join residence " +
+                    "natural join property_record " +
+                    "natural join resident " +
+                    "natural join community " +
+                    "where complaint_id is not null ",
+            "<if test='#{communityName} != null'> and community_name like concat('%', #{communityName}, '%') </if>",
+            "<if test='#{complaintType} != null'> and category like concat('%', #{complaintType}, '%') </if>",
+            "<if test='#{unitNum} != null'> and unit_num = #{unitNum} </if>",
+            "<if test='#{floorNum} != null'> and floor_num = #{floorNum} </if>",
+            "<if test='#{roomNum} != null'> and room_num = #{roomNum} </if>",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> and complaint_order.issue_date between #{sqlFrom} and #{sqlTo} </if>",
+            "</script>"
+    })
+    List<ComplaintRecord> listComplaintRecords(@Param("sqlFrom") Date sqlFrom,
+                                               @Param("sqlTo") Date sqlTo,
+                                               @Param("communityName") String communityName,
+                                               @Param("complaintType") String complaintType,
+                                               @Param("unitNum") int unitNum,
+                                               @Param("floorNum") int floorNum,
+                                               @Param("roomNum") int roomNum);
 }

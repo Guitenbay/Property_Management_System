@@ -147,7 +147,7 @@ public interface FeeMapper {
             "<script>",
             "select payment as fee,  " +
                     "'停车收入' as description, " +
-                    "start_time as issueDate  " +
+                    "start_time as feeDate  " +
                     "from payment_record " +
                     "natural join pks_fee_record ",
             "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
@@ -159,7 +159,7 @@ public interface FeeMapper {
             "<script>",
             "select payment as fee,  " +
                     "'停车管理费收入' as description,  " +
-                    "start_time as issueDate  " +
+                    "start_time as feeDate  " +
                     "from payment_record " +
                     "natural join pks_management_fee_record ",
             "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
@@ -171,7 +171,7 @@ public interface FeeMapper {
             "<script>",
             "select payment as fee,  " +
                     "'物业费收入' as description,  " +
-                    "start_time as issueDate  " +
+                    "start_time as feeDate  " +
                     "from payment_record " +
                     "natural join property_fee_record ",
             "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
@@ -184,7 +184,7 @@ public interface FeeMapper {
             "<script>",
             "select purchased_fee as fee, " +
                     "'购房收入' as description, " +
-                    "issue_date as issueDate  " +
+                    "issue_date as feeDate  " +
                     "from property_record",
             "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where issue_date between #{sqlFrom} and #{sqlTo} </if>",
             "</script>"
@@ -195,7 +195,7 @@ public interface FeeMapper {
             "<script>",
             "select income_fee as fee, " +
                     "income_src_desc as description, " +
-                    "income_issue_date as issueDate  " +
+                    "income_issue_date as feeDate  " +
                     "from other_income",
             "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where income_issue_date between #{sqlFrom} and #{sqlTo} </if>",
             "</script>"
@@ -206,7 +206,7 @@ public interface FeeMapper {
             "<script>",
             "select repair_fee as fee, " +
                     "'维修费用' as description, " +
-                    "issue_date asissueDate  " +
+                    "issue_date feeDate  " +
                     "from maintenance_record " +
                     "natural join equipment " +
                     "natural join equipment_info ",

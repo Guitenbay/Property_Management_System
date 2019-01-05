@@ -50,6 +50,36 @@
             </ul>
 
         </div>
+        <table class="table table-bordered table-striped">
+            <caption th:text="'收入记录：共' + ${incomeList.size()} + '条'"></caption>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" th:text="'#'+${incomeList.size()}"></th>
+                <th scope="col" th:each="field: ${feeFields}" th:text="${FOEMap[field.getName()]}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="emp, status: ${incomeList}">
+                <th scope="row" th:text="${status.count}"></th>
+                <td class="list" th:each="field: ${feeFields}" th:text="${emp[field.getName()]}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-striped">
+            <caption th:text="'支出记录：共' + ${outcomeList.size()} + '条'"></caption>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" th:text="'#'+${outcomeList.size()}"></th>
+                <th scope="col" th:each="field: ${feeFields}" th:text="${FOEMap[field.getName()]}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="emp, status: ${outcomeList}">
+                <th scope="row" th:text="${status.count}"></th>
+                <td class="list" th:each="field: ${feeFields}" th:text="${emp[field.getName()]}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

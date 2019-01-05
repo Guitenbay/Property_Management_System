@@ -19,7 +19,7 @@ public class SearchDateUtil {
             gc.setTime(search.getFromQuarter());
             gc.set(Calendar.DAY_OF_MONTH, 1);
             from.setTime(gc.getTimeInMillis());
-            gc.add(Calendar.MONTH, 4);//月份加4
+            gc.add(Calendar.MONTH, 3);//月份加3
             to.setTime(gc.getTimeInMillis());
         }
     }
