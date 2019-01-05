@@ -124,9 +124,10 @@ CREATE TABLE payment_record (
 CREATE TABLE property_fee_record (
 	payment_id	INT NOT NULL,
 	resident_id	char(18) NOT NULL,
-	PRIMARY KEY (payment_id, resident_id),
+	residence_id INT NOT NULL,
+	PRIMARY KEY (payment_id),
 	FOREIGN KEY (payment_id) REFERENCES payment_record(payment_id) ON DELETE CASCADE,
-	FOREIGN KEY (resident_id) REFERENCES resident(resident_id)
+	FOREIGN KEY (resident_id, residence_id) REFERENCES property_record(resident_id, residence_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE pks_fee_record (
@@ -213,4 +214,11 @@ CREATE TABLE complaint_order (
 	FOREIGN KEY (residence_id) REFERENCES residence(residence_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE other_income (
+  other_id  INT NOT NULL AUTO_INCREMENT,
+  income_src_desc  VARCHAR (255),
+  income_issue_date TIMESTAMP NOT NULL,
+  income_fee  NUMERIC (20,2) NOT NULL,
+  PRIMARY KEY (other_id)
+)
 SET FOREIGN_KEY_CHECKS = 1;
