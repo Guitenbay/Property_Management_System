@@ -26,15 +26,15 @@ public interface ComplaintMapper {
                     "complaint_result as opinion " +
                     "from complaint_order natural join residence_record " +
                     "natural join residence " +
-                    "natural join property_record " +
+                    "join property_record using (residence_id) " +
                     "natural join resident " +
                     "natural join community " +
                     "where complaint_id is not null ",
             "<if test='#{communityName} != null'> and community_name like concat('%', #{communityName}, '%') </if>",
             "<if test='#{complaintType} != null'> and category like concat('%', #{complaintType}, '%') </if>",
-            "<if test='#{unitNum} != null'> and unit_num = #{unitNum} </if>",
-            "<if test='#{floorNum} != null'> and floor_num = #{floorNum} </if>",
-            "<if test='#{roomNum} != null'> and room_num = #{roomNum} </if>",
+            "<if test='#{unitNum} != null'> and unit_num like concat('%', #{unitNum}, '%') </if>",
+            "<if test='#{floorNum} != null'> and floor_num like concat('%', #{floorNum}, '%') </if>",
+            "<if test='#{roomNum} != null'> and room_num like concat('%', #{roomNum}, '%') </if>",
             "<if test='#{sqlFrom} != null and #{sqlTo} != null'> and complaint_order.issue_date between #{sqlFrom} and #{sqlTo} </if>",
             "</script>"
     })
@@ -42,7 +42,7 @@ public interface ComplaintMapper {
                                                @Param("sqlTo") Date sqlTo,
                                                @Param("communityName") String communityName,
                                                @Param("complaintType") String complaintType,
-                                               @Param("unitNum") int unitNum,
-                                               @Param("floorNum") int floorNum,
-                                               @Param("roomNum") int roomNum);
+                                               @Param("unitNum") String unitNum,
+                                               @Param("floorNum") String floorNum,
+                                               @Param("roomNum") String roomNum);
 }

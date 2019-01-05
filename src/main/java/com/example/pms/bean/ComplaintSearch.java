@@ -2,9 +2,9 @@ package com.example.pms.bean;
 
 public class ComplaintSearch extends Search {
     private String communityName;
-    private int unitNum;
-    private int floorNum;
-    private int roomNum;
+    private String unitNum;
+    private String floorNum;
+    private String roomNum;
     private String complaintType;
 
     public String getCommunityName() {
@@ -15,27 +15,27 @@ public class ComplaintSearch extends Search {
         this.communityName = communityName;
     }
 
-    public int getUnitNum() {
+    public String getUnitNum() {
         return unitNum;
     }
 
-    public void setUnitNum(int unitNum) {
+    public void setUnitNum(String unitNum) {
         this.unitNum = unitNum;
     }
 
-    public int getFloorNum() {
+    public String getFloorNum() {
         return floorNum;
     }
 
-    public void setFloorNum(int floorNum) {
+    public void setFloorNum(String floorNum) {
         this.floorNum = floorNum;
     }
 
-    public int getRoomNum() {
+    public String getRoomNum() {
         return roomNum;
     }
 
-    public void setRoomNum(int roomNum) {
+    public void setRoomNum(String roomNum) {
         this.roomNum = roomNum;
     }
 

@@ -41,14 +41,14 @@
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2">户主身份证</span>
                     <input type="text" class="form-control" th:name="residentID" aria-describedby="basic-addon2"
-                           th:value="522422">
+                           value="">
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon3">设备类型</span>
                     <input type="text" class="form-control" th:name="equipmentType" aria-describedby="basic-addon3"
-                           th:value="电梯">
+                           value="">
                 </div>
             </div>
             <div class="col-lg-2">
@@ -57,7 +57,7 @@
         </form>
         <br>
         <table class="table table-bordered table-striped">
-            <caption th:text="${title}+'：共' + ${equipmentList.size()} + '条'"></caption>
+            <caption th:text="${title}+'：共' + ${equipmentList.size()} + '条　维修费用总计：'+ ${totalFee} +'元'"></caption>
             <thead class="thead-dark">
             <tr>
                 <th scope="col" th:text="'#'+${equipmentList.size()}"></th>

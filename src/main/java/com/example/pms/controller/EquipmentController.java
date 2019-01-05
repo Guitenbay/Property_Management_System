@@ -55,6 +55,8 @@ public class EquipmentController {
         EquipmentSearch equipmentSearch = new EquipmentSearch();
         equipmentSearch.setReportType("m");
         Date today = new Date();
+        equipmentSearch.setEquipmentType("");
+        equipmentSearch.setResidentID("");
         equipmentSearch.setFromMonthly(new java.sql.Date(today.getTime()));
         return searchRecord(equipmentSearch);
     }
@@ -67,12 +69,17 @@ public class EquipmentController {
         SearchDateUtil.getFromToBySearchType(from, to, equipmentSearch);
         java.sql.Date sqlFrom = new java.sql.Date(from.getTime());
         java.sql.Date sqlTo = new java.sql.Date(to.getTime());
+        List<RepairOrder> orderList = equipmentMapper.listRepairOrderRecord(equipmentSearch.getResidentID(),
+                equipmentSearch.getEquipmentType(),
+                sqlFrom, sqlTo);
         mav.addObject("FOEMap", fieldOfObjMap);
         mav.addObject("equipmentFields", repairOrderFields);
-        mav.addObject("equipmentList",
-                equipmentMapper.listRepairOrderRecord(equipmentSearch.getResidentID(),
-                        equipmentSearch.getEquipmentType(),
-                        sqlFrom, sqlTo));
+        mav.addObject("equipmentList", orderList);
+        double totalFee = 0;
+        for (RepairOrder order : orderList) {
+            totalFee += order.getRepairFee();
+        }
+        mav.addObject("totalFee", totalFee);
         mav.addObject("title", "报修记录");
         return mav;
     }

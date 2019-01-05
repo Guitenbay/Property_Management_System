@@ -9,4 +9,6 @@ public interface FeeService {
 
     @Transactional
     void addManagementFee(String residentID, int pksID, double fee, boolean paid);
+
+
 }

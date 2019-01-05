@@ -16,7 +16,7 @@
     "residentName": "户主名",
     "residentPhoneNumber": "手机号码",
     "costs": "费用（元）",
-    "issueDate": "入住时间",
+    "issueDate": "时间",
     "manFee": "管理费（元）",
     "residencePrice": "房价（元/平米）",
     "pksID": "车位ID",
@@ -36,6 +36,8 @@
     "equipmentID": "设备ID",
     "repairDate": "维修时间",
     "description": "描述",
-    "feeDate": "时间"
+    "feeDate": "时间",
+    "opinion": "意见",
+    "complaintCategory": "投诉类型"
   }
 }

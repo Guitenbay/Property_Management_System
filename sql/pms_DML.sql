@@ -81,13 +81,11 @@ INSERT INTO `payment_record` VALUES (6, 5.00, 'HOUR', 5, '2019-01-04 23:34:16', 
 INSERT INTO `payment_record` VALUES (7, 50.00, 'MONTH', 1, '2019-01-05 12:14:28', 'YES');
 INSERT INTO `payment_record` VALUES (8, 50.00, 'MONTH', 1, '2019-01-05 12:16:17', 'YES');
 
-
 INSERT INTO `purchased_pks` VALUES (1, '522422199810113213', 50.00);
 
 INSERT INTO `rented_pks` VALUES (11, '521321197502143512', 1.00, 800.00, 50.00);
 
 INSERT INTO `temporary_pks` VALUES (21, 'A1234');
-
 
 INSERT INTO `pks_fee_record` VALUES (1, 1, '购买车位');
 INSERT INTO `pks_fee_record` VALUES (4, 11, '租用车位');

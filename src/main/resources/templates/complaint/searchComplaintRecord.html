@@ -17,7 +17,7 @@
         </div>
         <br>
         <form class="row" id="search_fee_form" th:action="@{searchComplaintRecord}" method="post">
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addonFrom">月度</span>
                     <input type="date" class="form-control" th:name="fromMonthly" aria-describedby="basic-addonFrom"
@@ -27,7 +27,7 @@
                         </span>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addonTo">季度</span>
                     <input type="date" class="form-control" th:name="fromQuarter" aria-describedby="basic-addonTo"
@@ -37,31 +37,33 @@
                         </span>
                 </div>
             </div>
+            <br>
+            <br>
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2">小区名</span>
                     <input type="text" class="form-control" th:name="communityName" aria-describedby="basic-addon2"
-                           th:value="A">
+                           value="A">
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon3">单元号</span>
-                    <input type="number" class="form-control" th:name="unitNum" aria-describedby="basic-addon3"
-                           th:value="1">
+                    <input type="text" class="form-control" th:name="unitNum" aria-describedby="basic-addon3"
+                           value="">
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon4">楼层号</span>
-                    <input type="number" class="form-control" th:name="floorNum" aria-describedby="basic-addon4"
-                           th:value="1">
+                    <input type="text" class="form-control" th:name="floorNum" aria-describedby="basic-addon4"
+                           value="">
                 </div>
             </div> <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon5">房间号</span>
-                    <input type="number" class="form-control" th:name="roomNum" aria-describedby="basic-addon5"
-                           th:value="1">
+                    <input type="text" class="form-control" th:name="roomNum" aria-describedby="basic-addon5"
+                           value="">
                 </div>
             </div>
             <div class="col-lg-2">
