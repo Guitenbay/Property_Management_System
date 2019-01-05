@@ -2,12 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>费用管理</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/form.css"/>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
 <div id="wrapper">
@@ -17,11 +17,11 @@
         </div>
         <br>
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="idle">停车收入情况</a></li>
-            <li role="presentation"><a href="purchase">物业费缴纳</a></li>
-            <li role="presentation"><a href="rent">停车费用缴纳</a></li>
-            <li role="presentation"><a href="temporary">报修费用缴纳</a></li>
-            <li role="presentation"><a href="temporary">收支报表</a></li>
+            <li role="presentation"><a th:href="@{idle}">停车收入情况</a></li>
+            <li role="presentation"><a th:href="@{purchase}">物业费缴纳</a></li>
+            <li role="presentation"><a th:href="@{rent}">停车费用缴纳</a></li>
+            <li role="presentation"><a th:href="@{temporary}">报修费用缴纳</a></li>
+            <li role="presentation"><a th:href="@{temporary}">收支报表</a></li>
         </ul>
         <br>
     </div>
@@ -30,6 +30,6 @@
     </div>
 </div>
 </body>
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 </html>

@@ -1,20 +1,22 @@
 package com.example.pms.bean;
 
 public class BusyPks {
-    private int id;
+    private int pksID;
     private int communityID;
     private String communityName;
-    private String state;
-    private String type;
+    private String pksState;
+    private String pksType;
+    private double costs;
+    private String paid;
     private String holderID;
     private String holder;
 
-    public int getId() {
-        return id;
+    public int getPksID() {
+        return pksID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPksID(int pksID) {
+        this.pksID = pksID;
     }
 
     public int getCommunityID() {
@@ -33,20 +35,36 @@ public class BusyPks {
         this.communityName = communityName;
     }
 
-    public String getState() {
-        return state;
+    public String getPksState() {
+        return pksState;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setPksState(String pksState) {
+        this.pksState = pksState;
     }
 
-    public String getType() {
-        return type;
+    public String getPksType() {
+        return pksType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPksType(String pksType) {
+        this.pksType = pksType;
+    }
+
+    public double getCosts() {
+        return costs;
+    }
+
+    public void setCosts(double costs) {
+        this.costs = costs;
+    }
+
+    public String getPaid() {
+        return paid;
+    }
+
+    public void setPaid(String paid) {
+        this.paid = paid;
     }
 
     public String getHolderID() {

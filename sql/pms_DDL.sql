@@ -29,7 +29,7 @@ CREATE TABLE community (
 	pks_purchase_fee	numeric(20, 2) CHECK (pks_purchase_fee >= 0),
 	pks_rental_fee		numeric(15, 2) CHECK (pks_rental_fee >= 0),
 	residence_price		numeric(10, 2) DEFAULT 0 CHECK (residence_price >= 0),
-	residence_man_price numeric(5, 2) DEFAULT 0 CHECK (residence_man_price >=0)
+	residence_man_price numeric(5, 2) DEFAULT 0 CHECK (residence_man_price >=0),
 	PRIMARY KEY (community_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic; 
 
@@ -113,10 +113,11 @@ CREATE TABLE purchased_pks (
 
 CREATE TABLE payment_record (
 	payment_id	INT NOT NULL AUTO_INCREMENT,
-	payment		numeric(20, 2) CHECK (payment >= 0),
-	duration	numeric(5, 1) CHECK (duration > 0),
+	payment		  numeric(20, 2) CHECK (payment >= 0),
+	math	      VARCHAR(20) DEFAULT 'HOUR' CHECK (math in ('MINUTE', 'HOUR', 'DAY', 'WEEK', 'MONTH', 'YEAR', 'PERMANENT')),
+	duration    numeric(20, 0) DEFAULT 1 CHECK (duration >= 0),
 	start_time	timestamp NOT NULL,
-	checked		varchar(5) CHECK (checked in ('YES', 'NO')),
+	checked		  varchar(5) CHECK (checked in ('YES', 'NO')),
 	PRIMARY KEY (payment_id)
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -177,7 +178,7 @@ CREATE TABLE repair_order (
 	equipment_id	INT NOT NULL,
 	issue_date	timestamp NOT NULL,
 	repair_reason	varchar(1024),
-	processing	varchar(12) DEFAULT 'TODO' CHECK (processing in ('TODO', 'PROCESSING', 'DONE')),
+	processing	varchar(12) DEFAULT 'TODO' CHECK (processing in ('TODO', 'PROCESSING', 'PROCESSED', 'DONE')),
 	process_result	varchar(1024),
 	PRIMARY KEY (repair_id),
 	FOREIGN KEY (resident_id) REFERENCES resident(resident_id),
@@ -199,7 +200,7 @@ CREATE TABLE maintenance_record (
 	maintenance_worker	varchar(255) NOT NULL,
 	maintenance_result	varchar(1024),
 	PRIMARY KEY (equipment_id, issue_date),
-		FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id) ON DELETE CASCADE
+	FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id) ON DELETE CASCADE
 )ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE complaint_order (

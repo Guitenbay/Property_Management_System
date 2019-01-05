@@ -10,6 +10,8 @@ public class EquipmentController {
 
     @RequestMapping({"/index", "/"})
     public ModelAndView handleRequest() {
-        return new ModelAndView("index/equipment");
+        ModelAndView mav = new ModelAndView("index/equipment");
+        mav.addObject("title", "设备管理");
+        return mav;
     }
 }

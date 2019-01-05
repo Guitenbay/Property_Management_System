@@ -10,6 +10,8 @@ public class ComplaintController {
 
     @RequestMapping({"/index", "/"})
     public ModelAndView handleRequest() {
-        return new ModelAndView("index/complaint");
+        ModelAndView mav = new ModelAndView("index/complaint");
+        mav.addObject("title", "投诉意见管理");
+        return mav;
     }
 }

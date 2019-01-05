@@ -2,12 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>闲置房屋信息</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/form.css"/>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
 <div id="wrapper">
@@ -16,7 +16,36 @@
             <div th:replace="~{header :: head-property}"></div>
         </div>
         <br>
+        <div class="bd-example">
+            <form class="row" id="search_form" th:action="@{search}">
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">小区名</span>
+                        <input type="text" class="form-control" th:name="communityName" aria-describedby="basic-addon1"
+                               th:placeholder="小区名" th:value="A">
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">单元号</span>
+                        <input type="number" class="form-control" th:name="unitNumber" aria-describedby="basic-addon2"
+                               th:placeholder="单元号" th:value="1">
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">楼号</span>
+                        <input type="number" class="form-control" th:name="floorNumber" aria-describedby="basic-addon3"
+                               th:placeholder="楼号" th:value="1">
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <input type="submit" class="btn" th:value="筛选">
+                </div>
+            </form>
+        </div>
         <table class="table table-bordered table-striped">
+            <caption th:text="${title}+'：共' + ${residenceList.size()} + '条'"></caption>
             <thead class="thead-dark">
             <tr>
                 <th scope="col" th:text="'#'+${residenceList.size()}"></th>
@@ -36,8 +65,6 @@
     </div>
 </div>
 </body>
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/getRowInfo.js"></script>
-<script src="/js/search.js"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 </html>

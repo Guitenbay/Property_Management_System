@@ -1,17 +1,12 @@
 {
-  "ParkingSpace_zh": {
-    "id": "车位ID",
-    "communityID": "小区ID",
-    "communityName": "小区名",
-    "state": "车位状态",
-    "type": "车位类型",
-    "holderID": "车主ID/车牌号",
-    "holder": "车主"
-  },
   "Attrs_zh": {
-    "residenceID": "房屋ID",
     "communityID": "小区ID",
     "communityName": "小区名",
+    "pksState": "车位状态",
+    "pksType": "车位类型",
+    "holderID": "车主ID/车牌号",
+    "holder": "车主",
+    "residenceID": "房屋ID",
     "floor": "楼层",
     "unit": "单元号",
     "room": "房间号",
@@ -20,11 +15,17 @@
     "residentID": "户主ID",
     "residentName": "户主名",
     "residentPhoneNumber": "手机号码",
-    "costs": "价格（元）",
+    "costs": "费用（元）",
     "issueDate": "入住时间",
     "manFee": "管理费（元）",
     "residencePrice": "房价（元/平米）",
-    "pks_id": "车位ID",
-    "paid": "是否缴纳"
+    "pksID": "车位ID",
+    "paid": "是否缴纳",
+    "startTime": "起始时间",
+    "pksMonths": "租用时间（月）",
+    "pksHours": "停靠时间（小时）",
+    "licensePlate": "车牌号",
+    "payment": "应收（元）",
+    "ownerName": "车主姓名"
   }
 }

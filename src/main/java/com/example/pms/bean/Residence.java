@@ -4,8 +4,8 @@ public class Residence {
     private int residenceID;
     private int communityID;
     private String communityName;
-    private int floor;
     private int unit;
+    private int floor;
     private int room;
     private double area;
     private double manFee;

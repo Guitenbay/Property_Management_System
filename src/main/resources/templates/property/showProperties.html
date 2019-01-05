@@ -2,12 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>房产信息</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/form.css"/>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
 <div id="wrapper">
@@ -16,11 +16,11 @@
             <div th:replace="~{header :: head-property}"></div>
         </div>
         <br>
-        <a class="btn btn-primary" href="idle">
+        <a class="btn btn-primary" th:href="@{idle}">
             选择房屋 <span class="badge" th:if="${residenceID}!=null" th:text="${residenceID}"></span>
         </a>
         <div class="bd-example">
-            <form id="show-form" action="addResident">
+            <form id="show-form" th:action="@{addResident}">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -54,6 +54,7 @@
             </form>
         </div>
         <table class="table table-bordered table-striped">
+            <caption th:text="${title}+'：共' + ${residenceList.size()} + '条'"></caption>
             <thead class="thead-dark">
             <tr>
                 <th scope="col" th:text="'#'+${residenceList.size()}"></th>
@@ -65,7 +66,7 @@
             <tr th:each="emp, status: ${residenceList}">
                 <th scope="row" th:text="|${status.count}|"></th>
                 <td class="list" th:each="field: ${fields}" th:text="${emp[field.getName()]}"></td>
-                <td class="list"><a th:href="'addResident?id='+|'${emp[fields.get(0).getName()]}'|">解除绑定</a></td>
+                <td class="list"><a th:href="@{'addResident?id='+${emp[fields.get(0).getName()]}}">解除绑定</a></td>
             </tr>
             </tbody>
         </table>
@@ -73,8 +74,6 @@
     </div>
 </div>
 </body>
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/getRowInfo.js"></script>
-<script src="/js/search.js"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 </html>

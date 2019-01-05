@@ -16,7 +16,7 @@ public interface PropertyMapper {
 
     @Insert("insert into resident(resident_id, resident_name, phonenumber) values(#{residentID}, #{residentName}, #{phoneNumber}) " +
             "on duplicate key update resident_name = #{residentName}, phonenumber = #{phoneNumber}")
-    int createResident(@Param("residentName") String residentName, @Param("residentID") String residentID, @Param("phoneNumber") String phoneNumber);
+    void createResident(@Param("residentName") String residentName, @Param("residentID") String residentID, @Param("phoneNumber") String phoneNumber);
 
     @Insert("insert into property_record " +
             "values(#{residentID}, " +
@@ -30,10 +30,10 @@ public interface PropertyMapper {
             "purchased_fee = " +
             "(select area * residence_price from residence_record natural join community natural join residence " +
             " where residence_id = #{residenceID})")
-    int createPropertyRecord(@Param("residentID") String residentID, @Param("residenceID") int residenceID);
+    void createPropertyRecord(@Param("residentID") String residentID, @Param("residenceID") int residenceID);
 
     @Update("update residence_record set residence_state = #{state} where residence_id = #{residenceID}")
-    int updateResidenceRecord(@Param("residenceID") int residenceID, @Param("state") String state);
+    void updateResidenceRecord(@Param("residenceID") int residenceID, @Param("state") String state);
 
     @Select("select residence_id as residenceID, " +
             "community_id as communityID, " +
@@ -47,7 +47,7 @@ public interface PropertyMapper {
             "natural join residence " +
             "natural join community " +
             "where residence_state='IDLE' " +
-            "order by community_id, residence_id")
+            "order by community_id, unit_num, floor_num, room_num")
     List<Residence> listIdleResidences();
 
     @Select("select resident_id as residentID, " +
@@ -67,9 +67,28 @@ public interface PropertyMapper {
             "natural join resident " +
             "natural join residence " +
             "natural join community " +
-            "order by community_id, residence_id")
+            "order by community_id, unit_num, floor_num, room_num")
     List<PropertyRecord> listProperties();
 
-
-    List<PropertyFeeRecord> listPropertyFees();
+    @Select({
+            "<script>",
+            "select residence_id as residenceID, " +
+                    "community_id as communityID, " +
+                    "community_name as communityName, " +
+                    "floor_num as floor, " +
+                    "unit_num as unit, " +
+                    "room_num as room, " +
+                    "area, " +
+                    "residence_man_price * area as manFee " +
+                    "from residence_record " +
+                    "natural join residence " +
+                    "natural join community " +
+                    "where residence_state='IDLE' ",
+            "<if test='#{cName} != null'> and community_name like concat(#{cName}, '%') </if>",
+            "<if test='#{uNum} != null'> and unit_num = #{uNum} </if>",
+            "<if test='#{fNum} != null'> and floor_num = #{fNum} </if>",
+            "order by community_id, unit_num, floor_num, room_num",
+            "</script>"
+    })
+    List<Residence> searchIdleResidences(@Param("cName") String cName, @Param("uNum") int uNum, @Param("fNum") int fNum);
 }

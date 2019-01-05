@@ -4,10 +4,11 @@ package com.example.pms.dao;
 import com.example.pms.bean.ManagementFeeRecord;
 import com.example.pms.bean.PropertyFeeRecord;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -18,36 +19,104 @@ import java.util.List;
 public interface FeeMapper {
     void create(String residentID, String residenceID, double fee);
 
-    @Select("select resident_id as residentID, " +
-            "resident_name as residentName, " +
-            "community_id as communityID, " +
-            "community_name as communityName, " +
-            "residence_id as residenceID, " +
-            "floor_num as floor, " +
-            "unit_num as unit, " +
-            "room_num as room, " +
-            "area, " +
-            "area * residence_man_price as propertyFee, " +
-            "checked as paid " +
-            "from property_fee_record natural join payment_record " +
-            "natural join property_record " +
-            "natural join residence_record " +
-            "natural join resident " +
-            "natural join residence " +
-            "natural join community " +
-            "order by payment_id desc")
-    List<PropertyFeeRecord> listProFees();
+    @Select({
+            "<script>",
+            "select resident_id as residentID, " +
+                    "resident_name as residentName, " +
+                    "community_id as communityID, " +
+                    "community_name as communityName, " +
+                    "residence_id as residenceID, " +
+                    "floor_num as floor, " +
+                    "unit_num as unit, " +
+                    "room_num as room, " +
+                    "area, " +
+                    "area * residence_man_price as propertyFee, " +
+                    "start_time as startTime, " +
+                    "checked as paid " +
+                    "from property_fee_record natural join payment_record " +
+                    "natural join property_record " +
+                    "natural join residence_record " +
+                    "natural join resident " +
+                    "natural join residence " +
+                    "natural join community ",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>" +
+                    "order by payment_id desc",
+            "</script>"
+    })
+    List<PropertyFeeRecord> listProFees(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
 
-    @Select("select resident_id as residentID, " +
-            "resident_name as residentName, " +
-            "community_id as communityID, " +
-            "community_name as communityName, " +
-            "checked as paid " +
-            "from payment_record natural join parking_space " +
-            "natural join property_record " +
-            "natural join resident " +
-            "natural join residence " +
-            "natural join community " +
-            "order by payment_id desc")
-    List<ManagementFeeRecord> listManFees();
+
+    @Select({
+            "<script>",
+            "select resident_id as residentID, " +
+                    "resident_name as residentName, " +
+                    "community_id as communityID, " +
+                    "community_name as communityName, " +
+                    "pks_id as pksID, " +
+                    "pks_type as pksType, " +
+                    "man_fee as manFee, " +
+                    "start_time as startTime, " +
+                    "checked as paid " +
+                    "from pks_management_fee_record natural join payment_record " +
+                    "natural join property_record " +
+                    "natural join parking_space " +
+                    "natural join resident " +
+                    "natural join residence " +
+                    "natural join community ",
+            "<if test='#{sqlFrom} != null and #{sqlTo} != null'> where start_time between #{sqlFrom} and #{sqlTo} </if>",
+            "order by payment_id desc",
+            "</script>"
+    })
+    List<ManagementFeeRecord> listManFees(@Param("sqlFrom") Date sqlFrom, @Param("sqlTo") Date sqlTo);
+
+    @Select({
+            "<script>",
+            "select resident_id as residentID, " +
+                    "resident_name as residentName, " +
+                    "community_id as communityID, " +
+                    "community_name as communityName, " +
+                    "residence_id as residenceID, " +
+                    "floor_num as floor, " +
+                    "unit_num as unit, " +
+                    "room_num as room, " +
+                    "area, " +
+                    "area * residence_man_price as propertyFee, " +
+                    "current_timestamp as startTime, " +
+                    "'NO' as paid " +
+                    "from property_record natural join residence_record " +
+                    "natural join resident " +
+                    "natural join residence " +
+                    "natural join community " +
+                    "natural left outer join property_fee_record " +
+                    "where payment_id is null " +
+                    "order by residence_id ",
+            "</script>"
+    })
+    List<PropertyFeeRecord> listProFeesNeeded();
+
+    @Select({
+            "<script>",
+            "select resident_id as residentID, " +
+                    "resident_name as residentName, " +
+                    "community_id as communityID, " +
+                    "community_name as communityName, " +
+                    "pks_id as pksID, " +
+                    "pks_type as pksType, " +
+                    "man_fee as manFee, " +
+                    "current_timestamp as startTime, " +
+                    "'NO' as paid " +
+                    "from (select * from (select pks_id, resident_id, man_fee from purchased_pks) p_holder " +
+                    "union (select pks_id, resident_id, man_fee from rented_pks )) pr_holder " +
+                    "natural join property_record " +
+                    "natural join parking_space " +
+                    "natural join resident " +
+                    "natural join residence " +
+                    "natural join community " +
+                    "natural left outer join pks_management_fee_record " +
+                    "where payment_id is null " +
+                    "order by residence_id",
+            "</script>"
+    })
+    List<ManagementFeeRecord> listManFeesNeeded();
+
 }

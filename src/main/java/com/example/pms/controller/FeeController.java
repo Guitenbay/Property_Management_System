@@ -25,13 +25,14 @@ public class FeeController {
 
     @RequestMapping({"/index", "/"})
     public ModelAndView handleRequest() {
-        return new ModelAndView("index/fee");
+        ModelAndView mav = new ModelAndView("index/fee");
+        mav.addObject("title", "费用管理");
+        return mav;
     }
 
     @RequestMapping("residentFees")
     public ModelAndView listResidentFees() {
         ModelAndView mav = new ModelAndView("fee/showResidentFees");
-        addPksObjects(mav, feeMapper.listProFees(), PropertyRecord.class);
         return mav;
     }
 

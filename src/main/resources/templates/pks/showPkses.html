@@ -2,12 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>车位信息</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/form.css"/>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
 <div id="wrapper">
@@ -16,37 +16,62 @@
             <div th:replace="~{header :: head-parking}"></div>
         </div>
         <br>
-        <div class="bd-example">
-            <form id="show-form">
-                <div class="form-group row short-row" th:each="field: ${fields}">
-                    <label th:for="${field.getName()}" class="col-sm-2 col-form-label"
-                           th:text="${FOEMap[field.getName()]}"></label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:id="${field.getName()}">
-                    </div>
+        <div class="bd-example" th:if="${type}==null">
+            <form class="row" id="search_form" th:action="@{search}">
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">小区名</span>
+                        <input type="text" class="form-control" th:name="communityName" aria-describedby="basic-addon1"
+                               th:placeholder="小区名" th:value="A">
+                    </div><!-- /input-group -->
                 </div>
-
-                <button type="submit" class="btn btn-primary mr-sm-0 col-1">Insert</button>
+                <div class="col-lg-2">
+                    <input type="submit" class="btn" th:value="筛选">
+                </div>
+            </form>
+        </div>
+        <div class="bd-example" th:if="${type}!=null">
+            <a class="btn btn-primary" th:href="@{idle}"> 选择车位 </a>
+            <br>
+            <form id="show-form" th:action="@{'add'+${type}+'Pks'}">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" th:text="类型"></th>
+                        <th scope="col" th:each="field: ${inputFields}" th:text="${FOEMap[field.getName()]}"></th>
+                        <th scope="col">提交</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="List">
+                            <input type="text" class="form-control" th:name="type" th:value="${type}"
+                                   readonly="readonly">
+                        </td>
+                        <td class="list" th:each="field: ${inputFields}">
+                            <input type="text" class="form-control" th:name="${field.getName()}">
+                        </td>
+                        <td class="list">
+                            <input type="submit" class="btn btn-primary" th:value="确认">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </form>
         </div>
 
         <table class="table table-bordered table-striped">
+            <caption th:text="${title}+'：共' + ${pksList.size()} + '条'"></caption>
             <thead class="thead-dark">
             <tr>
                 <th scope="col" th:text="'#'+${pksList.size()}"></th>
                 <th scope="col" th:each="field: ${fields}" th:text="${FOEMap[field.getName()]}"></th>
-                <th scope="col" th:if="${type}=='i'">绑定</th>
-                <th scope="col" th:unless="${type}=='i'">解除绑定</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="emp, status: ${pksList}">
-                <th scope="row" th:text="|${status.count}|"></th>
+                <th scope="row" th:text="${status.count}"></th>
                 <td class="list" th:each="field: ${fields}" th:text="${emp[field.getName()]}"></td>
-                <td class="list" th:switch="${type}">
-                    <a th:case="i" th:href="'bind?id='+${emp['pks_id']}">绑定</a>
-                    <a th:case="*" th:href="unbind">解除绑定</a>
-                </td>
             </tr>
             </tbody>
         </table>
@@ -54,8 +79,6 @@
     </div>
 </div>
 </body>
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/getRowInfo.js"></script>
-<script src="/js/search.js"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 </html>

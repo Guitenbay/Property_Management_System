@@ -2,12 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>住户需缴纳费用账单</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/form.css"/>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}"/>
 </head>
 <body>
 <div id="wrapper">
@@ -16,8 +16,43 @@
             <div th:replace="~{header :: head-property}"></div>
         </div>
         <br>
+        <div class="bd-example">
+            <form class="row" id="search_fee_form" th:action="@{searchFee}" method="post">
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addonFrom">月度（选择月份）</span>
+                        <input type="date" class="form-control" th:name="fromMonthly" aria-describedby="basic-addonFrom"
+                               th:value="2019-01-01">
+                        <span class="input-group-addon">
+                            <input type="radio" aria-label="..." th:name="reportType" th:value="m" checked>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addonTo">季度（选择起始月份）</span>
+                        <input type="date" class="form-control" th:name="fromQuarter" aria-describedby="basic-addonTo"
+                               th:value="2019-01-01">
+                        <span class="input-group-addon">
+                            <input type="radio" aria-label="..." th:name="reportType" th:value="q">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <input type="text" disabled class="form-control" aria-label="..." th:value="缴费">
+                        <span class="input-group-addon">
+                            <input type="checkbox" aria-label="..." th:name="paid" checked>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <input type="submit" class="btn" th:value="筛选">
+                </div>
+            </form>
+        </div>
         <table class="table table-bordered table-striped">
-            <caption>物业费记录</caption>
+            <caption th:text="'物业费记录：共' + ${propertyFeeList.size()} + '条'"></caption>
             <thead class="thead-dark">
             <tr>
                 <th scope="col" th:text="'#'+${propertyFeeList.size()}"></th>
@@ -33,7 +68,7 @@
         </table>
         <br>
         <table class="table table-bordered table-striped">
-            <caption>管理费记录</caption>
+            <caption th:text="'管理费记录：共' + ${managementFeeList.size()} + '条'"></caption>
             <thead class="thead-dark">
             <tr>
                 <th scope="col" th:text="'#'+${managementFeeList.size()}"></th>
@@ -51,8 +86,6 @@
     </div>
 </div>
 </body>
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/getRowInfo.js"></script>
-<script src="/js/search.js"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 </html>

@@ -1,5 +1,7 @@
 package com.example.pms.bean;
 
+import java.sql.Timestamp;
+
 public class PropertyFeeRecord {
     //物业费记录
     private String residentID;
@@ -7,11 +9,12 @@ public class PropertyFeeRecord {
     private int communityID;
     private String communityName;
     private int residenceID;
-    private int floor;
     private int unit;
+    private int floor;
     private int room;
     private double area;
     private double propertyFee;
+    private Timestamp startTime;
     private String paid;
 
     public String getResidentID() {
@@ -21,13 +24,7 @@ public class PropertyFeeRecord {
     public void setResidentID(String residentID) {
         this.residentID = residentID;
     }
-    public String getPaid() {
-        return paid;
-    }
 
-    public void setPaid(String paid) {
-        this.paid = paid;
-    }
 
     public String getResidentName() {
         return residentName;
@@ -101,5 +98,19 @@ public class PropertyFeeRecord {
         this.propertyFee = propertyFee;
     }
 
+    public Timestamp getStartTime() {
+        return startTime;
+    }
 
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getPaid() {
+        return paid;
+    }
+
+    public void setPaid(String paid) {
+        this.paid = paid;
+    }
 }
